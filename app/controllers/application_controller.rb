@@ -11,5 +11,14 @@ class ApplicationController < Sinatra::Base
     sundae_ingred = sundae.ingredient_array
     sundae_ingred.to_json
   end
+  get '/shake' do
+    shake = Shake.all
+    shake.to_json
+  end
+  get '/shake_ingredients/:id' do
+    shake = Shake.find(params[:id])
+    shake_ingred = shake.ingredient_array
+    shake_ingred.to_json
+  end
 
 end
