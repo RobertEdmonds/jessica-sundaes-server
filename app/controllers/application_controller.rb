@@ -1,7 +1,7 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
-  # Add your routes here
+  # Sundae
   get '/sundae' do
     sundae = Sundae.all
     sundae.to_json
@@ -11,6 +11,13 @@ class ApplicationController < Sinatra::Base
     sundae_ingred = sundae.ingredient_array
     sundae_ingred.to_json
   end
+  patch '/sundae/:id' do
+    sundae = Sundae.find(params[:id])
+    sundae.update(likes: params[:likes] + 1)
+    all_sundae = Sundae.all
+    all_sundae.to_json
+  end
+  # Shake
   get '/shake' do
     shake = Shake.all
     shake.to_json
@@ -26,5 +33,6 @@ class ApplicationController < Sinatra::Base
     all_shake = Shake.all
     all_shake.to_json
   end
+
 
 end
