@@ -20,5 +20,11 @@ class ApplicationController < Sinatra::Base
     shake_ingred = shake.ingredient_array
     shake_ingred.to_json
   end
+  patch '/shake/:id' do
+    shake = Shake.find(params[:id])
+    shake.update(likes: params[:likes] + 1)
+    all_shake = Shake.all
+    all_shake.to_json
+  end
 
 end

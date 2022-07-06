@@ -1,4 +1,4 @@
-
+require_relative './shake_sundae.rb'
 class Sundae < ActiveRecord::Base
     has_many :sundae_reviews
 

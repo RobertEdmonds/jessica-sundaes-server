@@ -11,5 +11,9 @@ module Ingredient
             ingredient = self.ingredients
             ingredient.split(',')
         end
+        # def likes
+        #     like = self.likes
+        #     like
+        # end
     end
 end
