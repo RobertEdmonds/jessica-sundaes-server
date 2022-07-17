@@ -17,6 +17,12 @@ class ApplicationController < Sinatra::Base
     all_sundae = Sundae.all
     all_sundae.to_json
   end
+  # Sundae Reviews 
+  get '/sundae_reviews/:id' do 
+    sundae = Sundae.find(params[:id])
+    reviews = sundae.sundae_reviews.all 
+    reviews.to_json
+  end
   # Shake
   get '/shake' do
     shake = Shake.all
@@ -33,6 +39,13 @@ class ApplicationController < Sinatra::Base
     all_shake = Shake.all
     all_shake.to_json
   end
+  # Shake Reviews
+  get '/shake_reviews/:id' do 
+    shake = Shake.find(params[:id])
+    reviews = shake.shake_reviews.all 
+    reviews.to_json
+  end
+
 
 
 end
