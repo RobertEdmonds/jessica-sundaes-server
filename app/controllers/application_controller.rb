@@ -17,6 +17,12 @@ class ApplicationController < Sinatra::Base
     reviews = sundae.sundae_reviews
     reviews.to_json
   end
+  patch '/sundae_reviews/:id' do
+    sundae = Sundae.find(params[:sundae_id])
+    review = sundae.sundae_reviews.find(params[:id])
+    review.update(likes: params[:likes])
+    review.to_json
+  end
   # Shake
   # add plural routes, remove ingred
   get '/shakes' do
@@ -26,8 +32,7 @@ class ApplicationController < Sinatra::Base
   patch '/shake/:id' do
     shake = Shake.find(params[:id])
     shake.update(likes: params[:likes])
-    all_shake = Shake.all
-    all_shake.to_json
+    shake.to_json
   end
   # Shake Reviews
   # /shakes/:shake_id/shake_reviews
@@ -39,10 +44,10 @@ class ApplicationController < Sinatra::Base
     reviews.to_json
   end
   patch '/shake_reviews/:id' do
-    review = Shake_reviews.find(params[:id])
-    review.update(likes: params[:likes] + 1)
-    all_reviews = Shake_reviews.all
-    all_reviews.to_json
+    shake = Shake.find(params[:shake_id])
+    review = shake.shake_reviews.find(params[:id])
+    review.update(likes: params[:likes])
+    review.to_json
   end
 
 
