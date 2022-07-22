@@ -23,6 +23,15 @@ class ApplicationController < Sinatra::Base
     review.update(likes: params[:likes])
     review.to_json
   end
+  post '/sundae_reviews' do
+    new_review = SundaeReview.create(
+      name: params[:name],
+      comment: params[:comment],
+      sundae_id: params[:sundae_id],
+      likes: 0
+    )
+    new_review.to_json
+  end
   # Shake
   # add plural routes, remove ingred
   get '/shakes' do
