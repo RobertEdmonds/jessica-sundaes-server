@@ -58,6 +58,15 @@ class ApplicationController < Sinatra::Base
     review.update(likes: params[:likes])
     review.to_json
   end
+  post '/shake_reviews' do
+    new_review = ShakeReview.create(
+      name: params[:name],
+      comment: params[:comment],
+      shake_id: params[:shake_id],
+      likes: 0
+    )
+    new_review.to_json
+  end
 
 
 end
