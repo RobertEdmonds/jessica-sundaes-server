@@ -17,10 +17,17 @@ class ApplicationController < Sinatra::Base
     reviews = sundae.sundae_reviews
     reviews.to_json
   end
-  patch '/sundae_reviews/:id' do
-    sundae = Sundae.find(params[:sundae_id])
-    review = sundae.sundae_reviews.find(params[:id])
+  patch '/sundae_reviews_likes/:id' do
+    review = SundaeReview.find(params[:id])
     review.update(likes: params[:likes])
+    review.to_json
+  end
+  patch '/sundae_reviews/:id' do
+    review = SundaeReview.find(params[:id])
+    review.update(
+      name: params[:name],
+      comment: params[:comment]
+    )
     review.to_json
   end
   post '/sundae_reviews' do
@@ -52,9 +59,8 @@ class ApplicationController < Sinatra::Base
     reviews = shake.shake_reviews 
     reviews.to_json
   end
-  patch '/shake_reviews/:id' do
-    shake = Shake.find(params[:shake_id])
-    review = shake.shake_reviews.find(params[:id])
+  patch '/shake_reviews_likes/:id' do
+    review = ShakeReview.find(params[:id])
     review.update(likes: params[:likes])
     review.to_json
   end
@@ -66,6 +72,14 @@ class ApplicationController < Sinatra::Base
       likes: 0
     )
     new_review.to_json
+  end
+  patch '/shake_reviews/:id' do
+    review = ShakeReview.find(params[:id])
+    review.update(
+      name: params[:name],
+      comment: params[:comment]
+    )
+    review.to_json
   end
 
 
