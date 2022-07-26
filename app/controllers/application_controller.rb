@@ -38,7 +38,7 @@ class ApplicationController < Sinatra::Base
   # Shake
   get '/shakes' do
     shake = Shake.all
-    shake.to_json
+    shake.to_json(include: :shake_reviews)
   end
   patch '/shakes/:id' do
     shake = Shake.find(params[:id])
@@ -46,16 +46,6 @@ class ApplicationController < Sinatra::Base
     shake.to_json
   end
   # Shake Reviews
-  get '/shakes/:id' do 
-    shake = Shake.find(params[:id])
-    reviews = shake.shake_reviews 
-    reviews.to_json
-  end
-  patch '/shake_reviews_likes/:id' do
-    review = ShakeReview.find(params[:id])
-    review.update(likes: params[:likes])
-    review.to_json
-  end
   post '/shake_reviews' do
     new_review = ShakeReview.create(
       name: params[:name],
@@ -69,7 +59,8 @@ class ApplicationController < Sinatra::Base
     review = ShakeReview.find(params[:id])
     review.update(
       name: params[:name],
-      comment: params[:comment]
+      comment: params[:comment],
+      likes: params[:likes]
     )
     review.to_json
   end
