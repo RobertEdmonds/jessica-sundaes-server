@@ -4,7 +4,7 @@ class ApplicationController < Sinatra::Base
   # Sundae
   get '/sundaes' do
     sundae = Sundae.all
-    sundae.to_json
+    sundae.to_json(include: :sundae_reviews) 
   end
   patch '/sundae/:id' do
     sundae = Sundae.find(params[:id])
@@ -12,21 +12,12 @@ class ApplicationController < Sinatra::Base
     sundae.to_json
   end
   # Sundae Reviews 
-  get '/sundae/:id' do 
-    sundae = Sundae.find(params[:id])
-    reviews = sundae.sundae_reviews
-    reviews.to_json
-  end
-  patch '/sundae_reviews_likes/:id' do
-    review = SundaeReview.find(params[:id])
-    review.update(likes: params[:likes])
-    review.to_json
-  end
   patch '/sundae_reviews/:id' do
     review = SundaeReview.find(params[:id])
     review.update(
       name: params[:name],
-      comment: params[:comment]
+      comment: params[:comment],
+      likes: params[:likes]
     )
     review.to_json
   end
@@ -39,22 +30,23 @@ class ApplicationController < Sinatra::Base
     )
     new_review.to_json
   end
+  delete '/sundae_reviews/:id' do
+    review = SundaeReview.find(params[:id])
+    review.destroy
+    review.to_json
+  end
   # Shake
-  # add plural routes, remove ingred
   get '/shakes' do
     shake = Shake.all
     shake.to_json
   end
-  patch '/shake/:id' do
+  patch '/shakes/:id' do
     shake = Shake.find(params[:id])
     shake.update(likes: params[:likes])
     shake.to_json
   end
   # Shake Reviews
-  # /shakes/:shake_id/shake_reviews
-  # restful routs
-  # 
-  get '/shake/:id' do 
+  get '/shakes/:id' do 
     shake = Shake.find(params[:id])
     reviews = shake.shake_reviews 
     reviews.to_json
@@ -79,6 +71,11 @@ class ApplicationController < Sinatra::Base
       name: params[:name],
       comment: params[:comment]
     )
+    review.to_json
+  end
+  delete '/shake_reviews/:id' do
+    review = ShakeReview.find(params[:id])
+    review.destroy
     review.to_json
   end
 

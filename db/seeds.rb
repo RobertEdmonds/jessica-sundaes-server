@@ -91,7 +91,7 @@ likes: rand(1..10),
 ingredients: "vanilla ice cream, whole milk, creamy peanut butter, whipped cream, peanuts"
 )
 Shake.create(name: "Mango", 
-image_url: "https://www.liveeatlearn.com/wp-content/uploads/2020/08/mango-smoothie-vert.jpg",
+image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdtXqX3LfMQKQ7JlwJA2DIDi9H879sjSHkpg&usqp=CAU",
 cost: rand(5..10),
 calories: rand(300..500),
 likes: rand(1..10),
